@@ -1,0 +1,13 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/hyperbeat-staking-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: bearer
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  sources:
+  - openapi/hyperbeat-staking-openapi.yml

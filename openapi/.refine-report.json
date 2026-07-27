@@ -1,0 +1,14 @@
+{
+  "provider": "hyperbeat",
+  "sources": [
+    "hyperbeat-hyperliquid-api-openapi.yml"
+  ],
+  "outputs": [
+    "hyperbeat-hyperliquid-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

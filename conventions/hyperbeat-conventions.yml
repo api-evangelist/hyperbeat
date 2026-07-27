@@ -1,0 +1,36 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/hyperbeat-staking-openapi.yml
+# Cross-cutting request/response semantics for the Hyperbeat Staking API, derived
+# from the OpenAPI and searched against the docs. NOTE: no idempotency-key contract
+# is documented, so NO `type: Idempotency` pointer is emitted (staking flows are
+# made idempotent on-chain via sign-then-send, not via an API idempotency key).
+authentication:
+  style: http-bearer
+  format: JWT
+  header: Authorization
+  token_source: https://docs.p2p.org/docs/authentication
+  cross_link: authentication/hyperbeat-authentication.yml
+error_envelope:
+  shape: '{ "error": { "code": <int>, "message": <string>, "name": <string> } | null, "result": <object> | null }'
+  format: custom-envelope
+  cross_link: errors/hyperbeat-problem-types.yml
+idempotency:
+  supported: false
+  note: No API-level idempotency key. Safe replay is enforced on-chain — each write returns an unsignedTransaction that the client signs and broadcasts exactly once.
+pagination:
+  supported: false
+  note: No list endpoints paginate; staking info is a single-delegator lookup.
+versioning:
+  style: uri-path
+  current: v1
+  cross_link: lifecycle/hyperbeat-lifecycle.yml
+request_flow:
+  pattern: build-sign-send
+  note: Write operations return an unsignedTransaction; the client signs it and submits via the send endpoint (or directly to Hyperliquid).
+network_selector:
+  in: path
+  name: network
+  values: [mainnet, testnet]
+rate_limit_signaling:
+  documented: false

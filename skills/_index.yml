@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/hyperbeat-staking-openapi.yml
+skills:
+  - file: hyperbeat-stake-hype.md
+    name: Stake HYPE via Hyperbeat
+    api: openapi/hyperbeat-staking-openapi.yml
+    operations: [hyperliquid-transfer, hyperliquid-delegate, hyperliquid-send]
+  - file: hyperbeat-unstake-hype.md
+    name: Unstake HYPE via Hyperbeat
+    api: openapi/hyperbeat-staking-openapi.yml
+    operations: [hyperliquid-undelegate, hyperliquid-withdraw, hyperliquid-send, hyperliquid-info]
+  - file: hyperbeat-staking-info.md
+    name: Read Hyperbeat staking position
+    api: openapi/hyperbeat-staking-openapi.yml
+    operations: [hyperliquid-info]

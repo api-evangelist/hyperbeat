@@ -1,0 +1,18 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/hyperbeat-staking-openapi.yml
+# Searched the Hyperbeat docs for versioning/deprecation/SLA/status-page policy.
+# The Staking API versions via URI path (/api/v1/...). No published deprecation
+# policy, Sunset-header support, SLA, or status page was found (status.hyperbeat.org
+# does not resolve). No `StatusPage`/`Deprecation` pointers emitted (none exist).
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://docs.hyperbeat.org/hyperbeat-staking/staking-api
+deprecation:
+  policy_url: null
+  sunset_header: false
+sla:
+  url: null
+status_page: null
+deprecated_operations: []

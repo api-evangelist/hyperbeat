@@ -1,0 +1,113 @@
+# Hyperbeat
+
+## HyperBeat Docs
+
+- [About Hyperbeat](https://docs.hyperbeat.org/readme.md)
+- [Core contributors](https://docs.hyperbeat.org/readme/core-contributors.md)
+- [Liquid banking](https://docs.hyperbeat.org/liquid-banking.md)
+- [Hyperbeat Pay](https://docs.hyperbeat.org/liquid-banking/hyperbeat-pay.md)
+- [Liquid banking Architecture](https://docs.hyperbeat.org/liquid-banking/liquid-banking-architecture.md)
+- [USD+](https://docs.hyperbeat.org/liquid-banking/usd+.md)
+- [Architecture](https://docs.hyperbeat.org/liquid-banking/usd+/architecture.md)
+- [Frequently Asked Questions](https://docs.hyperbeat.org/liquid-banking/usd+/frequently-asked-questions.md)
+- [Contracts](https://docs.hyperbeat.org/liquid-banking/usd+/contracts.md)
+- [Beatpot](https://docs.hyperbeat.org/beatpot.md)
+- [How it works](https://docs.hyperbeat.org/beatpot/how-it-works.md)
+- [Provable fairness](https://docs.hyperbeat.org/beatpot/provable-fairness.md)
+- [Guaranteed Prizes](https://docs.hyperbeat.org/beatpot/guaranteed-prizes.md)
+- [How to play](https://docs.hyperbeat.org/beatpot/how-to-play.md)
+- [How to provide liquidity](https://docs.hyperbeat.org/beatpot/how-to-provide-liquidity.md)
+- [Beatpot smart contract](https://docs.hyperbeat.org/beatpot/beatpot-smart-contract.md)
+- [FAQs](https://docs.hyperbeat.org/beatpot/faqs.md)
+- [Hyperbeat Staking](https://docs.hyperbeat.org/hyperbeat-staking.md)
+- [beHYPE](https://docs.hyperbeat.org/hyperbeat-staking/behype.md): When you stake HYPE, you receive beHYPE in return, allowing you to keep earning staking rewards while still using your beHYPE in DeFi.
+- [Architecture](https://docs.hyperbeat.org/hyperbeat-staking/behype/architecture.md)
+- [Validator set](https://docs.hyperbeat.org/hyperbeat-staking/behype/validator-set.md)
+- [Builder codes](https://docs.hyperbeat.org/hyperbeat-staking/behype/builder-codes.md): A comprehensive guide for developers looking to integrate beHYPE staking and unstaking functionality into their applications.
+- [Staking API](https://docs.hyperbeat.org/hyperbeat-staking/staking-api.md)
+- [Getting started](https://docs.hyperbeat.org/hyperbeat-staking/staking-api/getting-started.md)
+- [Withdrawal](https://docs.hyperbeat.org/hyperbeat-staking/staking-api/withdrawal.md)
+- [Sign and Broadcast Transaction](https://docs.hyperbeat.org/hyperbeat-staking/staking-api/sign-and-broadcast-transaction.md)
+- [Transfer HYPE tokens from SPOT to STAKING balance](https://docs.hyperbeat.org/hyperbeat-staking/staking-api/transfer-hype-tokens-from-spot-to-staking-balance.md)
+- [Delegate HYPE tokens to Hyperbeat validator](https://docs.hyperbeat.org/hyperbeat-staking/staking-api/delegate-hype-tokens-to-hyperbeat-validator.md)
+- [Undelegate HYPE tokens from Hyperbeat validator](https://docs.hyperbeat.org/hyperbeat-staking/staking-api/undelegate-hype-tokens-from-hyperbeat-validator.md)
+- [Withdraw undelegated HYPE tokens to SPOT balance](https://docs.hyperbeat.org/hyperbeat-staking/staking-api/withdraw-undelegated-hype-tokens-to-spot-balance.md)
+- [Get Hyperliquid staking information for delegator](https://docs.hyperbeat.org/hyperbeat-staking/staking-api/get-hyperliquid-staking-information-for-delegator.md)
+- [Send a transaction to the network](https://docs.hyperbeat.org/hyperbeat-staking/staking-api/send-a-transaction-to-the-network.md)
+- [Vanilla staking](https://docs.hyperbeat.org/hyperbeat-staking/vanilla-staking.md)
+- [Hyperbeat Public RPC Node](https://docs.hyperbeat.org/hyperbeat-staking/hyperbeat-public-rpc-node.md)
+- [Hyperbeat Earn](https://docs.hyperbeat.org/hyperbeat-earn.md)
+- [HYPE Vault](https://docs.hyperbeat.org/hyperbeat-earn/hype-vault.md)
+- [UBTC Vault](https://docs.hyperbeat.org/hyperbeat-earn/ubtc-vault.md)
+- [USDT Vault](https://docs.hyperbeat.org/hyperbeat-earn/usdt-vault.md)
+- [USDC Vault](https://docs.hyperbeat.org/hyperbeat-earn/usdc-vault.md)
+- [Ventuals (HIP-3) VLP Vault](https://docs.hyperbeat.org/hyperbeat-earn/ventuals-hip-3-vlp-vault.md): The de facto source of liquidity for Ventuals.
+- [Nunchi (HIP-3) nLP Vault](https://docs.hyperbeat.org/hyperbeat-earn/nunchi-hip-3-nlp-vault.md): The de facto source of liquidity for Nunchi.
+- [LST Vault](https://docs.hyperbeat.org/hyperbeat-earn/lst-vault.md)
+- [liquidHYPE vault](https://docs.hyperbeat.org/hyperbeat-earn/liquidhype-vault.md)
+- [XAUt (Gold) Vault](https://docs.hyperbeat.org/hyperbeat-earn/xaut-gold-vault.md)
+- [Delta-Neutral Tokens (dnTokens)](https://docs.hyperbeat.org/delta-neutral-tokens-dntokens.md): Earn real, market‑neutral yield from perpetual funding payments on Hyperliquid.
+- [dnHYPE](https://docs.hyperbeat.org/delta-neutral-tokens-dntokens/dnhype.md)
+- [dnPUMP](https://docs.hyperbeat.org/delta-neutral-tokens-dntokens/dnpump.md)
+- [dnBTC](https://docs.hyperbeat.org/delta-neutral-tokens-dntokens/dnbtc.md)
+- [dnETH](https://docs.hyperbeat.org/delta-neutral-tokens-dntokens/dneth.md)
+- [dnFART](https://docs.hyperbeat.org/delta-neutral-tokens-dntokens/dnfart.md)
+- [dnSOL](https://docs.hyperbeat.org/delta-neutral-tokens-dntokens/dnsol.md)
+- [dnXPL](https://docs.hyperbeat.org/delta-neutral-tokens-dntokens/dnxpl.md)
+- [Morphobeat](https://docs.hyperbeat.org/morphobeat.md)
+- [Supply Vaults](https://docs.hyperbeat.org/morphobeat/supply-vaults.md)
+- [HYPE](https://docs.hyperbeat.org/morphobeat/supply-vaults/hype.md)
+- [MEV Capital HYPE](https://docs.hyperbeat.org/morphobeat/supply-vaults/hype/mev-capital-hype.md)
+- [Re7 HYPE](https://docs.hyperbeat.org/morphobeat/supply-vaults/hype/re7-hype.md)
+- [Gauntlet HYPE](https://docs.hyperbeat.org/morphobeat/supply-vaults/hype/gauntlet-hype.md)
+- [Hyperithm HYPE](https://docs.hyperbeat.org/morphobeat/supply-vaults/hype/hyperithm-hype.md)
+- [USDT0](https://docs.hyperbeat.org/morphobeat/supply-vaults/usdt0.md)
+- [MEV Capital USDT0](https://docs.hyperbeat.org/morphobeat/supply-vaults/usdt0/mev-capital-usdt0.md)
+- [Gauntlet USDT0](https://docs.hyperbeat.org/morphobeat/supply-vaults/usdt0/gauntlet-usdt0.md)
+- [Hyperithm USDT0](https://docs.hyperbeat.org/morphobeat/supply-vaults/usdt0/hyperithm-usdt0.md)
+- [Re7 USDT0](https://docs.hyperbeat.org/morphobeat/supply-vaults/usdt0/re7-usdt0.md)
+- [USDe](https://docs.hyperbeat.org/morphobeat/supply-vaults/usde.md)
+- [UETH](https://docs.hyperbeat.org/morphobeat/supply-vaults/ueth.md)
+- [rUSDC](https://docs.hyperbeat.org/morphobeat/supply-vaults/rusdc.md)
+- [USR](https://docs.hyperbeat.org/morphobeat/supply-vaults/usr.md)
+- [Collateral Assets](https://docs.hyperbeat.org/morphobeat/collateral-assets.md)
+- [MasterSwap](https://docs.hyperbeat.org/masterswap.md): MasterSwap is an aggregator of DEX aggregators, we query the price in leading aggregators on HyperEVM and then offer you the best price among all of them.
+- [Hyperbeat Builder Codes](https://docs.hyperbeat.org/hyperbeat-builder-codes.md)
+- [Vaults](https://docs.hyperbeat.org/hyperbeat-builder-codes/vaults.md)
+- [Hyperbeat Ultra HYPE](https://docs.hyperbeat.org/hyperbeat-builder-codes/vaults/hyperbeat-ultra-hype.md): This doc provides the necessary information to integrate the Hyperbeat Ultra HYPE (hbHYPE) vault into your applications.
+- [Hyperbeat Ultra UBTC](https://docs.hyperbeat.org/hyperbeat-builder-codes/vaults/hyperbeat-ultra-ubtc.md): This document provides the necessary information to integrate the Hyperbeat Ultra UBTC (hbBTC) vault into your applications.
+- [Hyperbeat USDT](https://docs.hyperbeat.org/hyperbeat-builder-codes/vaults/hyperbeat-usdt.md): This document provides the necessary information to integrate the Hyperbeat USDT (hbUSDT) vault, powered by Midas, into your applications.
+- [Hyperbeat USDC](https://docs.hyperbeat.org/hyperbeat-builder-codes/vaults/hyperbeat-usdc.md): This document provides the necessary information to integrate the Hyperbeat USDC (hbUSDC) vault, powered by Midas, into your applications.
+- [Hyperbeat XAUt](https://docs.hyperbeat.org/hyperbeat-builder-codes/vaults/hyperbeat-xaut.md): This document provides the necessary information to integrate the Hyperbeat XAUt (hbUSDT) vault, powered by Midas, into your applications.
+- [Hyperbeat lstHYPE](https://docs.hyperbeat.org/hyperbeat-builder-codes/vaults/hyperbeat-lsthype.md): This document provides the necessary information to integrate the Hyperbeat USDT (hbUSDT) vault, powered by Midas, into your applications.
+- [Ventuals (HIP-3) VLP Vault](https://docs.hyperbeat.org/hyperbeat-builder-codes/vaults/ventuals-hip-3-vlp-vault.md): This document provides the necessary information to integrate the Ventuals (HIP-3) wVLP vault, powered by Midas, into your applications.
+- [dnHYPE](https://docs.hyperbeat.org/hyperbeat-builder-codes/vaults/dnhype.md): This document provides the necessary information to integrate the dnHYPE vault, powered by Midas, into your applications.
+- [dnPUMP](https://docs.hyperbeat.org/hyperbeat-builder-codes/vaults/dnpump.md): This document provides the necessary information to integrate the dnPUMP vault, powered by Midas, into your applications.
+- [Staking](https://docs.hyperbeat.org/hyperbeat-builder-codes/staking.md)
+- [Liquid staking](https://docs.hyperbeat.org/hyperbeat-builder-codes/staking/liquid-staking.md): A comprehensive guide for developers looking to integrate beHYPE staking and unstaking functionality into their applications.
+- [Vanilla staking](https://docs.hyperbeat.org/hyperbeat-builder-codes/staking/vanilla-staking.md)
+- [Hyperfolio API](https://docs.hyperbeat.org/hyperbeat-builder-codes/hyperfolio-api.md)
+- [Hearts](https://docs.hyperbeat.org/hearts.md)
+- [Referral Program](https://docs.hyperbeat.org/hearts/referral-program.md): Earn extra Hearts by referring friends to Hyperbeat.
+- [Proof of solvency](https://docs.hyperbeat.org/resources/proof-of-solvency.md)
+- [Audits](https://docs.hyperbeat.org/resources/audits.md)
+- [Addresses](https://docs.hyperbeat.org/resources/addresses.md)
+- [Oracles](https://docs.hyperbeat.org/resources/oracles.md)
+- [Brand kit](https://docs.hyperbeat.org/resources/brand-kit.md)
+- [Legal](https://docs.hyperbeat.org/resources/legal.md)
+
+
+---
+
+# Agent Instructions
+This documentation is published with GitBook. GitBook is the documentation platform designed so that both humans and AI agents can read, navigate, and reason over technical content effectively. Learn more at gitbook.com.
+
+## Querying This Documentation
+If you need additional information, you can query the documentation dynamically by asking a question.
+Perform an HTTP GET request on a page URL with the `ask` query parameter:
+```
+GET https://docs.hyperbeat.org/readme.md?ask=<question>
+```
+The question should be specific, self-contained, and written in natural language.
+The response will contain a direct answer to the question and relevant excerpts and sources from the documentation.
+Use this mechanism when the answer is not explicitly present in the current page, you need clarification or additional context, or you want to retrieve related documentation sections.

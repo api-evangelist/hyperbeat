@@ -1,0 +1,88 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/hyperbeat-staking-openapi.yml
+# Derived from the numeric exception schemas embedded in the Hyperbeat Staking API
+# OpenAPI (docs.hyperbeat.org/hyperbeat-staking/staking-api). The API does NOT use
+# RFC 9457 problem+json; errors are returned in a custom envelope.
+format: custom-envelope
+envelope:
+  shape: '{ "error": { "code": <int>, "message": <string>, "name": <string> } | null, "result": <object> | null }'
+  success_field: result
+  error_field: error
+  note: On success `error` is null and `result` carries the payload; on failure `result` is null and `error` carries code/message/name.
+problems:
+  - code: 100101
+    name: ValidationException
+    status: 400
+    title: The data provided is not valid. Please check the request parameters and try again.
+    remediation: Validate request body/params against the operation schema before retrying.
+  - code: 101109
+    name: WrongTokenException
+    status: 401
+    title: An invalid Bearer token has been provided. Please specify the correct authentication token.
+    remediation: Re-issue a valid P2P.org bearer JWT (see https://docs.p2p.org/docs/authentication).
+  - code: 101110
+    name: TokenGuardException
+    status: 500
+    title: The request could not be performed because a server authorization error occurred.
+    remediation: Transient server-side auth error; retry with backoff and contact support if persistent.
+  - code: 101111
+    name: NoTokenException
+    status: 401
+    title: No Bearer token has been provided.
+    remediation: Attach an Authorization -> Bearer <JWT> header. Obtain a token per https://docs.p2p.org/docs/authentication.
+  - code: 129103
+    name: UnexpectedSendingTransactionException
+    status: 500
+    title: The transaction could not be sent because an unexpected error occurred.
+    remediation: Retry the send; if it persists, verify the signed transaction and network status.
+  - code: 129104
+    name: DelegateUnexpectedException
+    status: 500
+    title: The delegate operation could not be completed because an unexpected error occurred.
+    remediation: Retry with backoff; contact Hyperbeat/P2P.org support if persistent.
+  - code: 129105
+    name: UndelegateUnexpectedException
+    status: 500
+    title: The undelegate operation could not be completed because an unexpected error occurred.
+    remediation: Retry with backoff; contact support if persistent.
+  - code: 129106
+    name: WithdrawUnexpectedException
+    status: 500
+    title: The withdraw operation could not be completed because an unexpected error occurred.
+    remediation: Retry with backoff; contact support if persistent.
+  - code: 129107
+    name: TransferSpotToStakingUnexpectedException
+    status: 500
+    title: The transfer spot to staking operation could not be completed because an unexpected error occurred.
+    remediation: Retry with backoff; contact support if persistent.
+  - code: 129108
+    name: NotEnoughSpotBalanceException
+    status: 400
+    title: 'Not enough spot balance (message reports current balance and required amount).'
+    remediation: Fund the spot balance to at least the required amount before transferring.
+  - code: 129109
+    name: NotEnoughStakingBalanceException
+    status: 400
+    title: 'Not enough staking balance (message reports current balance and required amount).'
+    remediation: Transfer HYPE from spot to staking balance before delegating/withdrawing.
+  - code: 129110
+    name: DelegationLockedException
+    status: 400
+    title: 'Delegation is locked (message reports total locked balance).'
+    remediation: Wait for the Hyperliquid delegation lock period to elapse before undelegating.
+  - code: 129111
+    name: NotEnoughDelegatedBalanceException
+    status: 400
+    title: 'Not enough delegated balance (message reports current balance and required amount).'
+    remediation: Reduce the undelegate amount to at most the currently delegated balance.
+  - code: 129112
+    name: GetStakingInfoUnexpectedException
+    status: 500
+    title: The get staking info operation could not be completed because an unexpected error occurred.
+    remediation: Retry with backoff; contact support if persistent.
+  - code: 129113
+    name: InvalidSignedTransactionException
+    status: 400
+    title: The signed transaction is invalid and cannot be processed.
+    remediation: Re-sign the unsignedTransaction returned by the prior call and resubmit.

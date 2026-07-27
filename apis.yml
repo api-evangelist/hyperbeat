@@ -1,27 +1,119 @@
 aid: hyperbeat
 name: Hyperbeat
-description: 'Hyperbeat is a company surfaced as a portfolio company of electric-capital and added to
-  the API Evangelist network as a stub for enrichment. Sector: defi. This profile is a lead awaiting the
-  enrichment pipeline.'
+description: >-
+  Hyperbeat is a "Liquid Banking" DeFi platform on Hyperliquid's HyperEVM, backed by Electric Capital.
+  It combines a self-custodial smart wallet with saving, spending, trading, and yield in one account:
+  multi-chain deposits (BTC/ETH/SOL), up to 40x leveraged trading, up to ~8% APY on idle balances, a
+  crypto-collateralized credit card, and Chat & Pay. Its product suite spans Hyperbeat Pay and the USD+
+  stablecoin, beHYPE liquid staking, Hyperbeat Earn vaults, delta-neutral tokens (dnHYPE/dnBTC/dnETH),
+  Morphobeat money markets, MasterSwap DEX aggregation, and the Beatpot no-loss prize protocol. For
+  developers and institutions it exposes a Staking API (powered by P2P.org) for programmatic HYPE
+  staking, Builder Codes for beHYPE integration and revenue share, and a public Hyperliquid RPC node.
 url: https://raw.githubusercontent.com/api-evangelist/hyperbeat/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - electric-capital
-x-tier: stub
+x-tier: enriched
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
+image: https://docs.hyperbeat.org/~gitbook/image?url=https%3A%2F%2F3374536696-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Forganizations%252Fc5pQo8TWkfT3vxsBpjEs%252Fsites%252Fsite_8DCfQ%252Ficon%252F5NvaQNePJxJqfblCFSeI%252FMono-white.png%3Falt%3Dmedia%26token%3D8f675090-98b9-4515-bc9c-ac73d9ea4499&width=256&height=256&sign=717a6d7a&sv=2
 tags:
 - Company
-- Defi
-apis: []
+- DeFi
+- Staking
+- Liquid Staking
+- Hyperliquid
+- HyperEVM
+- Blockchain
+- Web3
+- Cryptocurrency
+- Yield
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: hyperbeat:hyperbeat-hyperliquid-api
+  name: Hyperbeat Hyperliquid API
+  description: The Hyperliquid API from Hyperbeat — 6 operation(s) for hyperliquid.
+  humanURL: https://docs.hyperbeat.org/hyperbeat-staking/staking-api
+  baseURL: https://api.p2p.org
+  tags:
+  - Hyperliquid
+  properties:
+  - type: OpenAPI
+    url: openapi/hyperbeat-hyperliquid-api-openapi.yml
+  - type: GettingStarted
+    url: https://docs.hyperbeat.org/hyperbeat-staking/staking-api/getting-started
+  - type: APIReference
+    url: https://docs.hyperbeat.org/hyperbeat-staking/staking-api
 common:
+- type: DeveloperPortal
+  url: https://docs.hyperbeat.org
+- type: Documentation
+  url: https://docs.hyperbeat.org
+- type: APIReference
+  url: https://docs.hyperbeat.org/hyperbeat-staking/staking-api
+- type: GettingStarted
+  url: https://docs.hyperbeat.org/hyperbeat-staking/staking-api/getting-started
+- type: Blog
+  url: https://hyperbeat.org/blog
+- type: GitHubOrganization
+  url: https://github.com/0xhyperbeat
+- type: SignUp
+  url: https://app.hyperbeat.org
+- type: TermsOfService
+  url: https://hyperbeat.org/terms
+- type: PrivacyPolicy
+  url: https://hyperbeat.org/privacy
+- type: Support
+  url: https://discord.gg/hyperbeat
+- type: Authentication
+  url: authentication/hyperbeat-authentication.yml
+- type: MCPServer
+  url: mcp/hyperbeat-mcp.yml
+- type: LLMsTxt
+  url: llms/hyperbeat-llms.txt
+- type: WellKnown
+  url: well-known/hyperbeat-well-known.yml
+- type: ErrorCatalog
+  url: errors/hyperbeat-problem-types.yml
+- type: Conventions
+  url: conventions/hyperbeat-conventions.yml
+- type: Conformance
+  url: conformance/hyperbeat-conformance.yml
+- type: Lifecycle
+  url: lifecycle/hyperbeat-lifecycle.yml
+- type: Sandbox
+  url: sandbox/hyperbeat-sandbox.yml
+- type: DataModel
+  url: data-model/hyperbeat-data-model.yml
+- type: AgenticAccess
+  url: agentic-access/hyperbeat-agentic-access.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DomainSecurity
+  url: security/hyperbeat-domain-security.yml
 - type: Website
   url: https://www.hyperbeat.org/
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

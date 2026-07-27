@@ -1,0 +1,932 @@
+# Source: https://docs.hyperbeat.org/hyperbeat-staking/staking-api (embedded OpenAPI fragments merged)
+openapi: 3.0.0
+info:
+  title: Hyperbeat Staking API
+  version: 1.0.0
+  description: Institutional HYPE staking on Hyperliquid via Hyperbeat's validator, powered by the P2P.org
+    Staking API. Endpoints are hosted at api.p2p.org; documented by Hyperbeat for funds, custodians, and
+    fintechs integrating HYPE staking.
+servers:
+- url: https://api.p2p.org
+  description: Production Staking API
+- url: https://api-test.p2p.org
+  description: Testing Staking API
+security:
+- bearer: []
+paths:
+  /api/v1/hyperliquid/{network}/staking/delegate:
+    post:
+      operationId: hyperliquid-delegate
+      summary: Delegate HYPE tokens to P2P validator
+      description: Delegate HYPE tokens to P2P validator for staking rewards
+      parameters:
+      - name: network
+        required: true
+        in: path
+        description: The Hyperliquid network to use
+        schema:
+          enum:
+          - mainnet
+          - testnet
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HyperLiquidStakingDelegateRequestDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponse'
+                properties:
+                  result:
+                    oneOf:
+                    - $ref: '#/components/schemas/HyperLiquidStakingDelegateResponseDto'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/NotEnoughStakingBalanceException'
+                    - $ref: '#/components/schemas/ValidationException'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/NoTokenException'
+                    - $ref: '#/components/schemas/WrongTokenException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/DelegateUnexpectedException'
+                    - $ref: '#/components/schemas/TokenGuardException'
+      tags:
+      - Hyperliquid
+  /api/v1/hyperliquid/{network}/staking/info:
+    get:
+      operationId: hyperliquid-info
+      summary: Get Hyperliquid staking information for delegator
+      description: Retrieve detailed staking information including spot balance, stake balance, delegations,
+        and pending withdrawals for a given delegator address
+      parameters:
+      - name: network
+        required: true
+        in: path
+        description: The Hyperliquid network to use
+        schema:
+          enum:
+          - mainnet
+          - testnet
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HyperLiquidStakingInfoRequestDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponse'
+                properties:
+                  result:
+                    oneOf:
+                    - $ref: '#/components/schemas/HyperLiquidStakingInfoResponseDto'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/ValidationException'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/NoTokenException'
+                    - $ref: '#/components/schemas/WrongTokenException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/GetStakingInfoUnexpectedException'
+                    - $ref: '#/components/schemas/TokenGuardException'
+      tags:
+      - Hyperliquid
+  /api/v1/hyperliquid/{network}/transaction/send:
+    post:
+      operationId: hyperliquid-send
+      summary: Send a transaction to the network
+      description: This endpoint allows you to send a transaction to the network
+      parameters:
+      - name: network
+        required: true
+        in: path
+        description: The Hyperliquid network to use
+        schema:
+          enum:
+          - mainnet
+          - testnet
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HyperLiquidStakingSendRequestDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponse'
+                properties:
+                  result:
+                    oneOf:
+                    - $ref: '#/components/schemas/HyperLiquidStakingSendResponseDto'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/InvalidSignedTransactionException'
+                    - $ref: '#/components/schemas/ValidationException'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/NoTokenException'
+                    - $ref: '#/components/schemas/WrongTokenException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/UnexpectedSendingTransactionException'
+                    - $ref: '#/components/schemas/TokenGuardException'
+      tags:
+      - Hyperliquid
+  /api/v1/hyperliquid/{network}/staking/transfer:
+    post:
+      operationId: hyperliquid-transfer
+      summary: Transfer HYPE tokens from SPOT to STAKING balance
+      description: Transfer HYPE tokens from SPOT to STAKING balance on the Hyperliquid network. Required
+        to delegate HYPE tokens for staking rewards.
+      parameters:
+      - name: network
+        required: true
+        in: path
+        description: The Hyperliquid network to use
+        schema:
+          enum:
+          - mainnet
+          - testnet
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HyperLiquidStakingTransferRequestDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponse'
+                properties:
+                  result:
+                    oneOf:
+                    - $ref: '#/components/schemas/HyperLiquidStakingTransferResponseDto'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/ValidationException'
+                    - $ref: '#/components/schemas/NotEnoughSpotBalanceException'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/NoTokenException'
+                    - $ref: '#/components/schemas/WrongTokenException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/TokenGuardException'
+                    - $ref: '#/components/schemas/TransferSpotToStakingUnexpectedException'
+      tags:
+      - Hyperliquid
+  /api/v1/hyperliquid/{network}/staking/undelegate:
+    post:
+      operationId: hyperliquid-undelegate
+      summary: Undelegate HYPE tokens from P2P validator
+      description: Undelegate HYPE tokens from P2P validator to stop earning staking rewards
+      parameters:
+      - name: network
+        required: true
+        in: path
+        description: The Hyperliquid network to use
+        schema:
+          enum:
+          - mainnet
+          - testnet
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HyperLiquidStakingUndelegateRequestDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponse'
+                properties:
+                  result:
+                    oneOf:
+                    - $ref: '#/components/schemas/HyperLiquidStakingUndelegateResponseDto'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/DelegationLockedException'
+                    - $ref: '#/components/schemas/NotEnoughDelegatedBalanceException'
+                    - $ref: '#/components/schemas/ValidationException'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/NoTokenException'
+                    - $ref: '#/components/schemas/WrongTokenException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/UndelegateUnexpectedException'
+                    - $ref: '#/components/schemas/TokenGuardException'
+      tags:
+      - Hyperliquid
+  /api/v1/hyperliquid/{network}/staking/withdraw:
+    post:
+      operationId: hyperliquid-withdraw
+      summary: Withdraw undelegated HYPE tokens to SPOT balance
+      description: Withdraw accumulated staking rewards from delegated HYPE tokens
+      parameters:
+      - name: network
+        required: true
+        in: path
+        description: The Hyperliquid network to use
+        schema:
+          enum:
+          - mainnet
+          - testnet
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HyperLiquidStakingWithdrawRequestDto'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/SuccessResponse'
+                properties:
+                  result:
+                    oneOf:
+                    - $ref: '#/components/schemas/HyperLiquidStakingWithdrawResponseDto'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/NotEnoughStakingBalanceException'
+                    - $ref: '#/components/schemas/ValidationException'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/NoTokenException'
+                    - $ref: '#/components/schemas/WrongTokenException'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/ExceptionResponse'
+                properties:
+                  error:
+                    allOf:
+                    - $ref: '#/components/schemas/WithdrawUnexpectedException'
+                    - $ref: '#/components/schemas/TokenGuardException'
+      tags:
+      - Hyperliquid
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    HyperLiquidStakingDelegateRequestDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: HYPE amount to delegate
+          minimum: 0.1
+          maximum: 9007199254740991
+        delegatorAddress:
+          type: string
+          description: Delegator Hyperliquid address
+      required:
+      - amount
+      - delegatorAddress
+    SuccessResponse:
+      type: object
+      properties:
+        error:
+          type: object
+          nullable: true
+          default: null
+        result:
+          type: object
+      required:
+      - error
+      - result
+    HyperLiquidStakingDelegateResponseDto:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Transaction amount
+        unsignedTransaction:
+          type: string
+          description: Unsigned transaction data
+        createdAt:
+          format: date-time
+          type: string
+          description: Creation timestamp
+      required:
+      - amount
+      - unsignedTransaction
+      - createdAt
+    ExceptionResponse:
+      type: object
+      properties:
+        error:
+          type: object
+        result:
+          type: object
+          nullable: true
+          default: null
+      required:
+      - error
+      - result
+    NotEnoughStakingBalanceException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129109
+        message:
+          type: string
+          default: 'Not enough staking balance. Current balance: 100, required amount: 500.'
+        name:
+          type: string
+          default: NotEnoughStakingBalanceException
+      required:
+      - code
+      - message
+      - name
+    ValidationException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 100101
+        message:
+          type: string
+          default: The data provided is not valid. Please check the request parameters and try again.
+        name:
+          type: string
+          default: ValidationException
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResponse'
+      required:
+      - code
+      - message
+      - name
+      - errors
+    ValidationErrorResponse:
+      type: object
+      properties:
+        property:
+          type: string
+        constraints:
+          additionalProperties:
+            type: string
+          type: array
+          items:
+            type: object
+      required:
+      - property
+      - constraints
+    NoTokenException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 101111
+        message:
+          type: string
+          default: No Bearer token has been provided. To obtain an authentication token, follow the instructions
+            at https://docs.p2p.org/docs/authentication.
+        name:
+          type: string
+          default: NoTokenException
+      required:
+      - code
+      - message
+      - name
+    WrongTokenException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 101109
+        message:
+          type: string
+          default: An invalid Bearer token has been provided. Please specify the correct authentication
+            token.
+        name:
+          type: string
+          default: WrongTokenException
+      required:
+      - code
+      - message
+      - name
+    DelegateUnexpectedException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129104
+        message:
+          type: string
+          default: The delegate operation could not be completed because an unexpected error occurred.
+        name:
+          type: string
+          default: DelegateUnexpectedException
+      required:
+      - code
+      - message
+      - name
+    TokenGuardException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 101110
+        message:
+          type: string
+          default: The request could not be performed because the server authorization error occurred.
+        name:
+          type: string
+          default: TokenGuardException
+      required:
+      - code
+      - message
+      - name
+    HyperLiquidStakingInfoRequestDto:
+      type: object
+      properties:
+        delegatorAddress:
+          type: string
+          description: Delegator Hyperliquid address
+      required:
+      - delegatorAddress
+    HyperLiquidStakingInfoResponseDto:
+      type: object
+      properties:
+        spotBalance:
+          type: number
+          description: HYPE balance that is possible to transfer to staking balance
+        stakeBalance:
+          type: number
+          description: HYPE balance that is available to delegate
+        delegations:
+          description: Array of all the delegations per delegator
+          type: array
+          items:
+            $ref: '#/components/schemas/HyperLiquidStakingDelegationDto'
+        pendingWithdrawal:
+          type: number
+          description: Amount of HYPE that was withdrawn but not yet available (7 days unstaking queue)
+      required:
+      - spotBalance
+      - stakeBalance
+      - delegations
+      - pendingWithdrawal
+    HyperLiquidStakingDelegationDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: Amount of HYPE delegated
+        validator:
+          type: string
+          description: Validator address
+        lockedUntil:
+          type: string
+          description: Timestamp when the delegation is locked until (ISO 8601)
+          nullable: true
+      required:
+      - amount
+      - validator
+      - lockedUntil
+    GetStakingInfoUnexpectedException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129112
+        message:
+          type: string
+          default: The get staking info operation could not be completed because an unexpected error occurred.
+        name:
+          type: string
+          default: GetStakingInfoUnexpectedException
+      required:
+      - code
+      - message
+      - name
+    HyperLiquidStakingSendRequestDto:
+      type: object
+      properties:
+        signedTransaction:
+          type: string
+          description: Signed transaction data
+      required:
+      - signedTransaction
+    HyperLiquidStakingSendResponseDto:
+      type: object
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+          description: Transaction creation timestamp
+        network:
+          type: string
+          description: Network name
+          enum:
+          - mainnet
+          - testnet
+      required:
+      - createdAt
+      - network
+    InvalidSignedTransactionException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129113
+        message:
+          type: string
+          default: 'The signed transaction is invalid and cannot be processed. '
+        name:
+          type: string
+          default: InvalidSignedTransactionException
+      required:
+      - code
+      - message
+      - name
+    UnexpectedSendingTransactionException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129103
+        message:
+          type: string
+          default: The transaction could not be sent because an unexpected error occurred.
+        name:
+          type: string
+          default: UnexpectedSendingTransactionException
+      required:
+      - code
+      - message
+      - name
+    HyperLiquidStakingTransferRequestDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: HYPE amount to transfer
+          minimum: 0.1
+          maximum: 9007199254740991
+        delegatorAddress:
+          type: string
+          description: Delegator Hyperliquid address
+      required:
+      - amount
+      - delegatorAddress
+    HyperLiquidStakingTransferResponseDto:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Transaction amount
+        unsignedTransaction:
+          type: string
+          description: Unsigned transaction data
+        createdAt:
+          format: date-time
+          type: string
+          description: Creation timestamp
+      required:
+      - amount
+      - unsignedTransaction
+      - createdAt
+    NotEnoughSpotBalanceException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129108
+        message:
+          type: string
+          default: 'Not enough spot balance. Current balance: 100, required amount: 500.'
+        name:
+          type: string
+          default: NotEnoughSpotBalanceException
+      required:
+      - code
+      - message
+      - name
+    TransferSpotToStakingUnexpectedException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129107
+        message:
+          type: string
+          default: The transfer spot to staking operation could not be completed because an unexpected
+            error occurred.
+        name:
+          type: string
+          default: TransferSpotToStakingUnexpectedException
+      required:
+      - code
+      - message
+      - name
+    HyperLiquidStakingUndelegateRequestDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: HYPE amount to undelegate
+          minimum: 0.1
+          maximum: 9007199254740991
+        delegatorAddress:
+          type: string
+          description: Delegator Hyperliquid address
+      required:
+      - amount
+      - delegatorAddress
+    HyperLiquidStakingUndelegateResponseDto:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Transaction amount
+        unsignedTransaction:
+          type: string
+          description: Unsigned transaction data
+        createdAt:
+          format: date-time
+          type: string
+          description: Creation timestamp
+      required:
+      - amount
+      - unsignedTransaction
+      - createdAt
+    DelegationLockedException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129110
+        message:
+          type: string
+          default: 'Delegation is locked. Total locked balance: 12.'
+        name:
+          type: string
+          default: DelegationLockedException
+      required:
+      - code
+      - message
+      - name
+    NotEnoughDelegatedBalanceException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129111
+        message:
+          type: string
+          default: 'Not enough delegated balance. Current balance: 100, required amount: 500.'
+        name:
+          type: string
+          default: NotEnoughDelegatedBalanceException
+      required:
+      - code
+      - message
+      - name
+    UndelegateUnexpectedException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129105
+        message:
+          type: string
+          default: The undelegate operation could not be completed because an unexpected error occurred.
+        name:
+          type: string
+          default: UndelegateUnexpectedException
+      required:
+      - code
+      - message
+      - name
+    HyperLiquidStakingWithdrawRequestDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: HYPE amount to withdraw
+          minimum: 0.1
+          maximum: 9007199254740991
+        delegatorAddress:
+          type: string
+          description: Delegator Hyperliquid address
+      required:
+      - amount
+      - delegatorAddress
+    HyperLiquidStakingWithdrawResponseDto:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Transaction amount
+        unsignedTransaction:
+          type: string
+          description: Unsigned transaction data
+        createdAt:
+          format: date-time
+          type: string
+          description: Creation timestamp
+      required:
+      - amount
+      - unsignedTransaction
+      - createdAt
+    WithdrawUnexpectedException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129106
+        message:
+          type: string
+          default: The withdraw operation could not be completed because an unexpected error occurred.
+        name:
+          type: string
+          default: WithdrawUnexpectedException
+      required:
+      - code
+      - message
+      - name

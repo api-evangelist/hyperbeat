@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Hyperbeat Staking API
+  version: 1.0.0
+# Captures API Evangelist enrichment metadata over the harvested Staking API spec.
+# Never mutates the original openapi/hyperbeat-staking-openapi.yml.
+extends: openapi/hyperbeat-staking-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: hyperbeat
+      x-apievangelist-powered-by: p2p.org
+      x-apievangelist-chain: hyperliquid-hyperevm
+      x-apievangelist-audience: institutional
+  - target: $.paths['/api/v1/hyperliquid/{network}/staking/delegate'].post
+    update:
+      x-agentic-consequence: physical
+  - target: $.paths['/api/v1/hyperliquid/{network}/staking/undelegate'].post
+    update:
+      x-agentic-consequence: physical
+  - target: $.paths['/api/v1/hyperliquid/{network}/staking/withdraw'].post
+    update:
+      x-agentic-consequence: physical
+  - target: $.paths['/api/v1/hyperliquid/{network}/staking/info'].get
+    update:
+      x-agentic-consequence: read

@@ -1,0 +1,33 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/hyperbeat-staking-openapi.yml
+# Entity-relationship graph derived from the Staking API OpenAPI schemas. The API
+# is delegator-centric: a Delegator (Hyperliquid address) holds balances and a set
+# of Delegations to validators. Values are HYPE amounts on Hyperliquid.
+entities:
+  - name: Delegator
+    identifier: delegatorAddress
+    id_domain: Hyperliquid address (HyperEVM)
+    fields: [spotBalance, stakeBalance, pendingWithdrawal]
+    source_schema: HyperLiquidStakingInfoResponseDto
+  - name: Delegation
+    fields: [amount, validator, lockedUntil]
+    source_schema: HyperLiquidStakingDelegationDto
+  - name: Validator
+    identifier: validator
+    id_domain: Hyperliquid validator address
+  - name: Transaction
+    fields: [unsignedTransaction, signedTransaction, amount, createdAt]
+    source_schema: HyperLiquidStakingSendRequestDto
+relationships:
+  - from: Delegator
+    to: Delegation
+    type: has_many
+    via: delegations
+  - from: Delegation
+    to: Validator
+    type: belongs_to
+    via: validator
+notes:
+  - pendingWithdrawal reflects HYPE in the 7-day Hyperliquid unstaking queue.
+  - lockedUntil (ISO 8601) gates undelegation; see DelegationLockedException (129110).

@@ -1,0 +1,24 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.hyperbeat.org/hyperbeat-staking/staking-api/getting-started
+# Test-vs-production separation for the Hyperbeat Staking API, captured verbatim
+# from the docs. No test cards/tokens (this is a staking API, not card payments);
+# the sandbox is a dedicated testing endpoint plus the Hyperliquid testnet.
+environments:
+  - name: production
+    base_url: https://api.p2p.org
+    network: mainnet
+    description: Production Staking API against the Hyperliquid mainnet.
+  - name: testing
+    base_url: https://api-test.p2p.org
+    network: testnet
+    description: Testing Staking API against the Hyperliquid testnet.
+network_param:
+  in: path
+  name: network
+  values: [mainnet, testnet]
+  note: The {network} path segment selects the Hyperliquid network for every operation.
+auth:
+  note: Obtain a bearer JWT via https://docs.p2p.org/docs/authentication (separate tokens per environment).
+public_rpc:
+  hyperliquid_mainnet_evm: https://hl-mainnet.rpc.p2p.world/evm

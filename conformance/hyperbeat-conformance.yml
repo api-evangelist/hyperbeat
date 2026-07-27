@@ -1,0 +1,28 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/hyperbeat-staking-openapi.yml
+# Cross-cutting standards conformance, derived from the Staking API OpenAPI and
+# searched against the Hyperbeat docs. Smart-contract security audits are published
+# (github.com/0xhyperbeat/Audits, plus partner audits for August Digital, Midas,
+# Morpho) but these are audits, not a formal SOC2/ISO compliance program — so no
+# `Compliance` pointer is emitted (no fabrication of certifications).
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: Auth is http bearer JWT (issued by P2P.org), not an OAuth2 flow.
+  - id: oidc
+    conforms: false
+  - id: bearer-jwt
+    conforms: true
+    evidence: securitySchemes.bearer type http, scheme bearer, bearerFormat JWT.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a custom { error, result } envelope, not application/problem+json.
+  - id: json-api
+    conforms: false
+  - id: rest-json
+    conforms: true
+    evidence: JSON request/response over HTTPS with resource-style paths.
+  - id: smart-contract-audited
+    conforms: true
+    evidence: 'Audit reports published at https://github.com/0xhyperbeat/Audits and partner docs (August Digital, Midas, Morpho).'

@@ -64,6 +64,8 @@ apis:
   - type: APIReference
     url: https://docs.hyperbeat.org/hyperbeat-staking/staking-api
 common:
+- type: Overlay
+  url: overlays/hyperbeat-staking-overlay.yaml
 - type: DeveloperPortal
   url: https://docs.hyperbeat.org
 - type: Documentation

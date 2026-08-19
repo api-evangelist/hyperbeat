@@ -2,28 +2,31 @@ generated: '2026-07-19'
 method: derived
 status: candidate
 source: openapi/hyperbeat-staking-openapi.yml
-# No official hosted/remote MCP server was found for Hyperbeat (searched docs,
-# npm @modelcontextprotocol, MCP registries). This is a CANDIDATE tool list
-# derived one-tool-per-operation from the Staking API OpenAPI.
 server:
   name: hyperbeat-staking
   transport: http
 tools:
-  - name: transfer_hype_spot_to_staking
-    description: Transfer HYPE tokens from SPOT to STAKING balance on Hyperliquid.
-    source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-transfer
-  - name: delegate_hype
-    description: Delegate HYPE tokens to the Hyperbeat (P2P.org) validator.
-    source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-delegate
-  - name: undelegate_hype
-    description: Undelegate HYPE tokens from the Hyperbeat validator.
-    source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-undelegate
-  - name: withdraw_hype
-    description: Withdraw undelegated HYPE tokens to SPOT balance.
-    source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-withdraw
-  - name: get_staking_info
-    description: Get Hyperliquid staking information for a delegator.
-    source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-info
-  - name: send_transaction
-    description: Broadcast a signed transaction to the Hyperliquid network.
-    source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-send
+- name: transfer_hype_spot_to_staking
+  description: Transfer HYPE tokens from SPOT to STAKING balance on Hyperliquid.
+  source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-transfer
+- name: delegate_hype
+  description: Delegate HYPE tokens to the Hyperbeat (P2P.org) validator.
+  source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-delegate
+- name: undelegate_hype
+  description: Undelegate HYPE tokens from the Hyperbeat validator.
+  source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-undelegate
+- name: withdraw_hype
+  description: Withdraw undelegated HYPE tokens to SPOT balance.
+  source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-withdraw
+- name: get_staking_info
+  description: Get Hyperliquid staking information for a delegator.
+  source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-info
+- name: send_transaction
+  description: Broadcast a signed transaction to the Hyperliquid network.
+  source_operation: openapi/hyperbeat-staking-openapi.yml#hyperliquid-send
+deployment:
+  mode: none
+  verified: derived
+  tools: 6
+  checked: '2026-08-12'
+  source: catalog MCP census

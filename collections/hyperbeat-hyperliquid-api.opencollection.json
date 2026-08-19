@@ -1,0 +1,162 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Hyperbeat Staking Hyperliquid API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Hyperliquid",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delegate HYPE tokens to P2P validator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.p2p.org/api/v1/hyperliquid/:network/staking/delegate",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The Hyperliquid network to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delegate HYPE tokens to P2P validator for staking rewards"
+        },
+        {
+          "info": {
+            "name": "Get Hyperliquid staking information for delegator",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.p2p.org/api/v1/hyperliquid/:network/staking/info",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The Hyperliquid network to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve detailed staking information including spot balance, stake balance, delegations, and pending withdrawals for a given delegator address"
+        },
+        {
+          "info": {
+            "name": "Send a transaction to the network",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.p2p.org/api/v1/hyperliquid/:network/transaction/send",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The Hyperliquid network to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint allows you to send a transaction to the network"
+        },
+        {
+          "info": {
+            "name": "Transfer HYPE tokens from SPOT to STAKING balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.p2p.org/api/v1/hyperliquid/:network/staking/transfer",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The Hyperliquid network to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Transfer HYPE tokens from SPOT to STAKING balance on the Hyperliquid network. Required to delegate HYPE tokens for staking rewards."
+        },
+        {
+          "info": {
+            "name": "Undelegate HYPE tokens from P2P validator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.p2p.org/api/v1/hyperliquid/:network/staking/undelegate",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The Hyperliquid network to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Undelegate HYPE tokens from P2P validator to stop earning staking rewards"
+        },
+        {
+          "info": {
+            "name": "Withdraw undelegated HYPE tokens to SPOT balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.p2p.org/api/v1/hyperliquid/:network/staking/withdraw",
+            "params": [
+              {
+                "name": "network",
+                "value": "",
+                "type": "path",
+                "description": "The Hyperliquid network to use"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Withdraw accumulated staking rewards from delegated HYPE tokens"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

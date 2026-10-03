@@ -441,18 +441,18 @@ paths:
       - Hyperliquid
 components:
   schemas:
-    InvalidSignedTransactionException:
+    TransferSpotToStakingUnexpectedException:
       type: object
       properties:
         code:
           type: number
-          default: 129113
+          default: 129107
         message:
           type: string
-          default: 'The signed transaction is invalid and cannot be processed. '
+          default: The transfer spot to staking operation could not be completed because an unexpected error occurred.
         name:
           type: string
-          default: InvalidSignedTransactionException
+          default: TransferSpotToStakingUnexpectedException
       required:
       - code
       - message
@@ -473,6 +473,20 @@ components:
       - code
       - message
       - name
+    ValidationErrorResponse:
+      type: object
+      properties:
+        property:
+          type: string
+        constraints:
+          additionalProperties:
+            type: string
+          type: array
+          items:
+            type: object
+      required:
+      - property
+      - constraints
     GetStakingInfoUnexpectedException:
       type: object
       properties:
@@ -485,6 +499,201 @@ components:
         name:
           type: string
           default: GetStakingInfoUnexpectedException
+      required:
+      - code
+      - message
+      - name
+    NotEnoughSpotBalanceException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129108
+        message:
+          type: string
+          default: 'Not enough spot balance. Current balance: 100, required amount: 500.'
+        name:
+          type: string
+          default: NotEnoughSpotBalanceException
+      required:
+      - code
+      - message
+      - name
+    UnexpectedSendingTransactionException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129103
+        message:
+          type: string
+          default: The transaction could not be sent because an unexpected error occurred.
+        name:
+          type: string
+          default: UnexpectedSendingTransactionException
+      required:
+      - code
+      - message
+      - name
+    WrongTokenException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 101109
+        message:
+          type: string
+          default: An invalid Bearer token has been provided. Please specify the correct authentication token.
+        name:
+          type: string
+          default: WrongTokenException
+      required:
+      - code
+      - message
+      - name
+    HyperLiquidStakingDelegateRequestDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: HYPE amount to delegate
+          minimum: 0.1
+          maximum: 9007199254740991
+        delegatorAddress:
+          type: string
+          description: Delegator Hyperliquid address
+      required:
+      - amount
+      - delegatorAddress
+    NotEnoughDelegatedBalanceException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129111
+        message:
+          type: string
+          default: 'Not enough delegated balance. Current balance: 100, required amount: 500.'
+        name:
+          type: string
+          default: NotEnoughDelegatedBalanceException
+      required:
+      - code
+      - message
+      - name
+    NotEnoughStakingBalanceException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129109
+        message:
+          type: string
+          default: 'Not enough staking balance. Current balance: 100, required amount: 500.'
+        name:
+          type: string
+          default: NotEnoughStakingBalanceException
+      required:
+      - code
+      - message
+      - name
+    HyperLiquidStakingTransferResponseDto:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Transaction amount
+        unsignedTransaction:
+          type: string
+          description: Unsigned transaction data
+        createdAt:
+          format: date-time
+          type: string
+          description: Creation timestamp
+      required:
+      - amount
+      - unsignedTransaction
+      - createdAt
+    HyperLiquidStakingSendRequestDto:
+      type: object
+      properties:
+        signedTransaction:
+          type: string
+          description: Signed transaction data
+      required:
+      - signedTransaction
+    HyperLiquidStakingTransferRequestDto:
+      type: object
+      properties:
+        amount:
+          type: number
+          description: HYPE amount to transfer
+          minimum: 0.1
+          maximum: 9007199254740991
+        delegatorAddress:
+          type: string
+          description: Delegator Hyperliquid address
+      required:
+      - amount
+      - delegatorAddress
+    HyperLiquidStakingDelegateResponseDto:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Transaction amount
+        unsignedTransaction:
+          type: string
+          description: Unsigned transaction data
+        createdAt:
+          format: date-time
+          type: string
+          description: Creation timestamp
+      required:
+      - amount
+      - unsignedTransaction
+      - createdAt
+    SuccessResponse:
+      type: object
+      properties:
+        error:
+          type:
+          - object
+          - 'null'
+          default: null
+        result:
+          type: object
+      required:
+      - error
+      - result
+    DelegateUnexpectedException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129104
+        message:
+          type: string
+          default: The delegate operation could not be completed because an unexpected error occurred.
+        name:
+          type: string
+          default: DelegateUnexpectedException
+      required:
+      - code
+      - message
+      - name
+    UndelegateUnexpectedException:
+      type: object
+      properties:
+        code:
+          type: number
+          default: 129105
+        message:
+          type: string
+          default: The undelegate operation could not be completed because an unexpected error occurred.
+        name:
+          type: string
+          default: UndelegateUnexpectedException
       required:
       - code
       - message
@@ -511,6 +720,19 @@ components:
       - stakeBalance
       - delegations
       - pendingWithdrawal
+    ExceptionResponse:
+      type: object
+      properties:
+        error:
+          type: object
+        result:
+          type:
+          - object
+          - 'null'
+          default: null
+      required:
+      - error
+      - result
     HyperLiquidStakingUndelegateRequestDto:
       type: object
       properties:
@@ -525,19 +747,22 @@ components:
       required:
       - amount
       - delegatorAddress
-    SuccessResponse:
+    InvalidSignedTransactionException:
       type: object
       properties:
-        error:
-          type:
-          - object
-          - 'null'
-          default: null
-        result:
-          type: object
+        code:
+          type: number
+          default: 129113
+        message:
+          type: string
+          default: 'The signed transaction is invalid and cannot be processed. '
+        name:
+          type: string
+          default: InvalidSignedTransactionException
       required:
-      - error
-      - result
+      - code
+      - message
+      - name
     HyperLiquidStakingSendResponseDto:
       type: object
       properties:
@@ -554,135 +779,44 @@ components:
       required:
       - createdAt
       - network
-    TokenGuardException:
+    NoTokenException:
       type: object
       properties:
         code:
           type: number
-          default: 101110
+          default: 101111
         message:
           type: string
-          default: The request could not be performed because the server authorization error occurred.
+          default: No Bearer token has been provided. To obtain an authentication token, follow the instructions at https://docs.p2p.org/docs/authentication.
         name:
           type: string
-          default: TokenGuardException
+          default: NoTokenException
       required:
       - code
       - message
       - name
-    NotEnoughStakingBalanceException:
+    ValidationException:
       type: object
       properties:
         code:
           type: number
-          default: 129109
+          default: 100101
         message:
           type: string
-          default: 'Not enough staking balance. Current balance: 100, required amount: 500.'
+          default: The data provided is not valid. Please check the request parameters and try again.
         name:
           type: string
-          default: NotEnoughStakingBalanceException
+          default: ValidationException
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationErrorResponse'
       required:
       - code
       - message
       - name
-    UndelegateUnexpectedException:
-      type: object
-      properties:
-        code:
-          type: number
-          default: 129105
-        message:
-          type: string
-          default: The undelegate operation could not be completed because an unexpected error occurred.
-        name:
-          type: string
-          default: UndelegateUnexpectedException
-      required:
-      - code
-      - message
-      - name
-    TransferSpotToStakingUnexpectedException:
-      type: object
-      properties:
-        code:
-          type: number
-          default: 129107
-        message:
-          type: string
-          default: The transfer spot to staking operation could not be completed because an unexpected error occurred.
-        name:
-          type: string
-          default: TransferSpotToStakingUnexpectedException
-      required:
-      - code
-      - message
-      - name
-    HyperLiquidStakingDelegateResponseDto:
-      type: object
-      properties:
-        amount:
-          type: string
-          description: Transaction amount
-        unsignedTransaction:
-          type: string
-          description: Unsigned transaction data
-        createdAt:
-          format: date-time
-          type: string
-          description: Creation timestamp
-      required:
-      - amount
-      - unsignedTransaction
-      - createdAt
-    HyperLiquidStakingDelegateRequestDto:
-      type: object
-      properties:
-        amount:
-          type: number
-          description: HYPE amount to delegate
-          minimum: 0.1
-          maximum: 9007199254740991
-        delegatorAddress:
-          type: string
-          description: Delegator Hyperliquid address
-      required:
-      - amount
-      - delegatorAddress
+      - errors
     HyperLiquidStakingWithdrawResponseDto:
-      type: object
-      properties:
-        amount:
-          type: string
-          description: Transaction amount
-        unsignedTransaction:
-          type: string
-          description: Unsigned transaction data
-        createdAt:
-          format: date-time
-          type: string
-          description: Creation timestamp
-      required:
-      - amount
-      - unsignedTransaction
-      - createdAt
-    NotEnoughSpotBalanceException:
-      type: object
-      properties:
-        code:
-          type: number
-          default: 129108
-        message:
-          type: string
-          default: 'Not enough spot balance. Current balance: 100, required amount: 500.'
-        name:
-          type: string
-          default: NotEnoughSpotBalanceException
-      required:
-      - code
-      - message
-      - name
-    HyperLiquidStakingTransferResponseDto:
       type: object
       properties:
         amount:
@@ -716,154 +850,22 @@ components:
       - amount
       - unsignedTransaction
       - createdAt
-    UnexpectedSendingTransactionException:
+    TokenGuardException:
       type: object
       properties:
         code:
           type: number
-          default: 129103
+          default: 101110
         message:
           type: string
-          default: The transaction could not be sent because an unexpected error occurred.
+          default: The request could not be performed because the server authorization error occurred.
         name:
           type: string
-          default: UnexpectedSendingTransactionException
+          default: TokenGuardException
       required:
       - code
       - message
       - name
-    WrongTokenException:
-      type: object
-      properties:
-        code:
-          type: number
-          default: 101109
-        message:
-          type: string
-          default: An invalid Bearer token has been provided. Please specify the correct authentication token.
-        name:
-          type: string
-          default: WrongTokenException
-      required:
-      - code
-      - message
-      - name
-    ExceptionResponse:
-      type: object
-      properties:
-        error:
-          type: object
-        result:
-          type:
-          - object
-          - 'null'
-          default: null
-      required:
-      - error
-      - result
-    ValidationException:
-      type: object
-      properties:
-        code:
-          type: number
-          default: 100101
-        message:
-          type: string
-          default: The data provided is not valid. Please check the request parameters and try again.
-        name:
-          type: string
-          default: ValidationException
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ValidationErrorResponse'
-      required:
-      - code
-      - message
-      - name
-      - errors
-    NoTokenException:
-      type: object
-      properties:
-        code:
-          type: number
-          default: 101111
-        message:
-          type: string
-          default: No Bearer token has been provided. To obtain an authentication token, follow the instructions at https://docs.p2p.org/docs/authentication.
-        name:
-          type: string
-          default: NoTokenException
-      required:
-      - code
-      - message
-      - name
-    DelegateUnexpectedException:
-      type: object
-      properties:
-        code:
-          type: number
-          default: 129104
-        message:
-          type: string
-          default: The delegate operation could not be completed because an unexpected error occurred.
-        name:
-          type: string
-          default: DelegateUnexpectedException
-      required:
-      - code
-      - message
-      - name
-    HyperLiquidStakingTransferRequestDto:
-      type: object
-      properties:
-        amount:
-          type: number
-          description: HYPE amount to transfer
-          minimum: 0.1
-          maximum: 9007199254740991
-        delegatorAddress:
-          type: string
-          description: Delegator Hyperliquid address
-      required:
-      - amount
-      - delegatorAddress
-    HyperLiquidStakingWithdrawRequestDto:
-      type: object
-      properties:
-        amount:
-          type: number
-          description: HYPE amount to withdraw
-          minimum: 0.1
-          maximum: 9007199254740991
-        delegatorAddress:
-          type: string
-          description: Delegator Hyperliquid address
-      required:
-      - amount
-      - delegatorAddress
-    HyperLiquidStakingSendRequestDto:
-      type: object
-      properties:
-        signedTransaction:
-          type: string
-          description: Signed transaction data
-      required:
-      - signedTransaction
-    ValidationErrorResponse:
-      type: object
-      properties:
-        property:
-          type: string
-        constraints:
-          additionalProperties:
-            type: string
-          type: array
-          items:
-            type: object
-      required:
-      - property
-      - constraints
     WithdrawUnexpectedException:
       type: object
       properties:
@@ -888,22 +890,20 @@ components:
           description: Delegator Hyperliquid address
       required:
       - delegatorAddress
-    NotEnoughDelegatedBalanceException:
+    HyperLiquidStakingWithdrawRequestDto:
       type: object
       properties:
-        code:
+        amount:
           type: number
-          default: 129111
-        message:
+          description: HYPE amount to withdraw
+          minimum: 0.1
+          maximum: 9007199254740991
+        delegatorAddress:
           type: string
-          default: 'Not enough delegated balance. Current balance: 100, required amount: 500.'
-        name:
-          type: string
-          default: NotEnoughDelegatedBalanceException
+          description: Delegator Hyperliquid address
       required:
-      - code
-      - message
-      - name
+      - amount
+      - delegatorAddress
     HyperLiquidStakingDelegationDto:
       type: object
       properties:
